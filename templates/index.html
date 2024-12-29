@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取验证码邮件</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJYFjC7n2vF5dP0P+YpvKJv5Iwbq1k5Yh35Ewl7zTq2p9IFBs5h7c7PSaGgn" crossorigin="anonymous">
+    <style>
+        /* 保持原有样式，适当调整 */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ff9f9f, #ff70a6);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            color: #f7a0d3;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .contact-info a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff70a6;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff9f9f;
+        }
+
+        pre {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            color: #0f0;
+            overflow-x: auto;
+        }
+
+        /* 响应式设计保持不变 */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>获取验证码邮件</h1>
+        <div class="contact-info">
+            <span>有问题请告诉我</span>
+            <a href="https://t.me/ttc0915">联系方式 电脑/TG</a>
+        </div>
+
+        <form id="emailForm">
+            <input type="email" id="emailInput" placeholder="请输入您的邮箱地址" required>
+            <button type="submit">获取验证码</button>
+        </form>
+
+        <div id="result" class="mt-4">
+            <!-- JSON 结果将显示在这里 -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const resultDiv = document.getElementById('result');
+
+            fetch(`/get_code/${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error') {
+                        resultDiv.innerHTML = `<pre style="color: red;">${JSON.stringify(data, null, 2)}</pre>`;
+                    } else {
+                        resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    }
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<pre style="color: red;">${error}</pre>`;
+                });
+        });
+    </script>
+
+</body>
+</html>
