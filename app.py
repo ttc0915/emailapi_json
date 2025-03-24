@@ -16,7 +16,7 @@ def get_verification_code(email):
 
     # 添加多个表单字段
     fields = {
-        "token": "3b1bfb9ab2ed4e08979c8d552152f7a6",
+        "token": "6153f3883c3b4521a70090d4e4b6e6d0",
         "folder": "Inbox",
         "mail_id": "1732607589833756811",
         "start_time": "2024-05-01",
