@@ -20,7 +20,7 @@ def get_verification_code(email):
         "folder": "Inbox",
         "mail_id": "1732607589833756811",
         "start_time": "2024-05-01",
-        "end_time": "2025-03-24",
+        "end_time": "2025-12-24",
         "page": "1",
         "limit": "10",
         "to": email
